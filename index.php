@@ -1,18 +1,19 @@
 
 <?php
 include 'Classes/RealConvertor.php';
-if ($argv[4] == '') {
+$date = $_GET['date'];
+if ($date == null) {
     $convertor = new RealConvertor(date('m-d-Y'));
-} else {
-    $convertor = new RealConvertor($argv[4]);
-}
-if ($argv[4] == null) {
     echo "\nCurrent exchange rate: \n \t USD to: \n";
 } else {
-    echo "\nExchange rate on date ${argv[4]}: \n \t USD to: \n";
+    $convertor = new RealConvertor($date);
+    echo "\nExchange rate on date $date: \n \t USD to: \n";
 }
 foreach ($convertor->getCurrencies() as $currency => $value) {
     echo $currency . ' = ' . $value . "\n";
 };
 echo "\n\n";
-echo ("$argv[3] $argv[1] = " . $convertor->convert($argv[1], $argv[2], $argv[3]) . " $argv[2]");
+$amount = $_GET['amount'];
+$from = $_GET['from'];
+$to = $_GET['to'];
+echo ("$amount $from = " . $convertor->convert($from, $to, $amount) . " $to");
