@@ -6,9 +6,9 @@ const MAX_CURRENCIES_FILES = 1;
 class RealConvertor extends Convertor
 {
 
-    public function __construct($from)
+    public function __construct($date)
     {
-        $this->loadCurrencies($from);
+        $this->loadCurrencies($date);
     }
 
     public function loadCurrencies($date)
