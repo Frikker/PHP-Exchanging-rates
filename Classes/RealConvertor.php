@@ -27,7 +27,7 @@ class RealConvertor extends Convertor
                     if ($file == '.' || $file == '..' || $file > $file_to_delete) continue;
                     $file_to_delete = $file;
                 }
-                unlink($dir . $file_to_delete);
+                unlink($dir . $file_to_delete . '.json');
             }
             $currenciesJSON = file_get_contents("https://api.exchangeratesapi.io/latest?base=USD");
             file_put_contents($filename, $currenciesJSON);
