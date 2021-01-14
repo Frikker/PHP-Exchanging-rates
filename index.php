@@ -23,21 +23,38 @@
         </div>
     </nav>
     <main class="container">
-        <form action="index.php">
-            <div class="row g-3 py-5 px-5">
-                <input type="text" name="amount" class="form-control">
-                <select name="from" id="from" class="form-select">
-                    <?php foreach ($convertor->getCurrencies() as $currency => $value) : ?>
-                        <option value="<?= $currency ?>"><?= $currency ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <button type="submit" class="btn btn-primary w-100">=</button>
-                <select name="to" id="from" class="form-select">
-                    <?php foreach ($convertor->getCurrencies() as $currency => $value) : ?>
-                        <option value="<?= $currency ?>"><?= $currency ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <input type="date" name="date" value="<?= date('Y-m-d') ?>">
+        <form action="index.php" class="needs-validation">
+            <div class="row g-3 py-5">
+
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="text" id="amount" name="amount" class="form-control" placeholder="Сколько">
+                        <select name="from" id="from" class="form-select">
+                            <?php foreach ($convertor->getCurrencies() as $currency => $value) : ?>
+                                <option value="<?= $currency ?>"><?= $currency ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span type="submit" class="input-group-text">Сконвертировать в :</span>
+                        <select name="to" id="from" class="form-select">
+                            <?php foreach ($convertor->getCurrencies() as $currency => $value) : ?>
+                                <option value="<?= $currency ?>"><?= $currency ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-text">По курсу от</span>
+                        <input class="form-control" type="date" name="date" value="<?= date('Y-m-d') ?>">
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary bg-dark">Конвертация</button>
+                </div>
             </div>
         </form>
         <p class="lead"><?php echo ("$amount $from = " . $convertor->convert($from, $to, $amount) . " $to"); ?></p>
