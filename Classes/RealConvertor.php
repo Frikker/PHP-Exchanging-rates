@@ -17,7 +17,7 @@ class RealConvertor extends Convertor
         $filename = $dir . $date . '.json';
         if (file_exists($filename)) {
             $currenciesJSON = file_get_contents($filename);
-        } elseif ($date < date('m-d-Y')) {
+        } elseif ($date < date('Y-m-d')) {
             throw new ErrorException("No exchanging rate on $date.");
         } else {
             $catalog = scandir($dir);

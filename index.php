@@ -9,8 +9,8 @@
     <?php
     include 'Classes/RealConvertor.php';
     $date = $_GET['date'];
-    if ($date = NAN) {
-        $convertor = new RealConvertor(date("m-d-Y"));
+    if ($date == NAN) {
+        $convertor = new RealConvertor(date("Y-m-d"));
     } else {
         $convertor = new RealConvertor($date);
     }
@@ -37,11 +37,12 @@
                         <option value="<?= $currency ?>"><?= $currency ?></option>
                     <?php endforeach; ?>
                 </select>
+                <input type="date" name="date" value="<?= date('Y-m-d') ?>">
             </div>
         </form>
         <p class="lead"><?php echo ("$amount $from = " . $convertor->convert($from, $to, $amount) . " $to"); ?></p>
         <?php
-        if ($date == null) {
+        if ($date == NAN || $date == date('Y-m-d')) {
             echo "\nCurrent exchange rate: \n \t USD to: \n";
         } else {
             echo "\nExchange rate on date $date: \n \t USD to: \n";
@@ -49,7 +50,7 @@
         foreach ($convertor->getCurrencies() as $currency => $value) {
             echo $currency . ' = ' . $value . ";\n";
         }; ?>
-    </div>
+    </main>
 </body>
 
 </html>
